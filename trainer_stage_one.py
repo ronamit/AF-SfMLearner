@@ -25,7 +25,7 @@ class Trainer:
 
         self.models = {}  # 字典
         self.parameters_to_train = []  # 列表
-        self.device = torch.device("cpu" if self.opt.no_cuda else "cuda")
+        self.device = torch.device("cpu" if not torch.cuda.is_available() or self.opt.no_cuda else "cuda")
         self.num_scales = len(self.opt.scales)
 
         self.models["position_encoder"] = networks.ResnetEncoder(

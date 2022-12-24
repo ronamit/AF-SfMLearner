@@ -27,7 +27,8 @@ class Trainer:
         self.parameters_to_train = []  # 列表
         self.parameters_to_train_0 = []
 
-        self.device = torch.device("cpu" if self.opt.no_cuda else "cuda")
+        self.device = torch.device("cpu" if not torch.cuda.is_available() or self.opt.no_cuda else "cuda")
+
 
         self.num_scales = len(self.opt.scales)  # 4
         self.num_input_frames = len(self.opt.frame_ids)  # 3
